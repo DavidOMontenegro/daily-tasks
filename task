@@ -1,0 +1,38 @@
+#!/bin/bash
+
+file="/home/me/montenegro/daily-tasks/tasks.txt"
+
+function main {
+    if [ -z "${1}" ]
+    then
+        list_tasks
+    else
+        if [ "${1}" == "add" ]
+        then
+            add_task "${2}"
+        elif [ "${1}" == "clear" ]
+        then
+            clear_tasks
+        fi
+    fi
+}
+
+function list_tasks {
+    more $file
+}
+
+function add_task {
+    if [ -z "${1}" ]
+    then
+        echo "You didn't say anything"
+    else
+        echo "- ${1}" >> $file
+    fi
+}
+
+function clear_tasks {
+   echo "What I did today:" > $file
+   echo >> $file
+}
+
+main "${@}"
